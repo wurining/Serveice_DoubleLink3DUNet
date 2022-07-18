@@ -1,7 +1,7 @@
 # Service_DoubleLink3DUNet
 
 ## Model Label
-- Double-Link 3D U-NNet (Group A)
+- Double-Link 3D U-Net (Group A)
 - Simplify Double-Link 3D U-Net (Group B)
 - 3D U-Net (Group C)
 
