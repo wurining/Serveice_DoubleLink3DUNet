@@ -5,7 +5,7 @@ import tensorflow as tf
 import tensorflow_addons as tfa
 from tensorflow.keras import Input
 from tensorflow.keras.layers import Conv3D, concatenate, Conv3DTranspose, LeakyReLU, Softmax, Dropout, MaxPooling3D
-from lib.loss_function import AuxLossFunction
+from lib.loss_function import AuxLossFunction, ModalityPairingLoss
 
 
 

@@ -7,7 +7,6 @@ Converted my standard 2D Unet to 3D.
 """
 
 import tensorflow as tf
-import numpy as np
 from tensorflow.keras.layers import Input, Conv3D, MaxPooling3D, concatenate, Conv3DTranspose, Dropout
 
 
