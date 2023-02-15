@@ -1,0 +1,28 @@
+FROM tensorflow/tensorflow:2.6.1-gpu
+
+# set the working directory
+WORKDIR /src
+# COPY ./.dockerignore /src/.dockerignore
+# COPY ./environment.yml /src/environment.yml
+COPY . /src
+
+ENV DEBIAN_FRONTEND noninteractive
+ENV DEBCONF_NOWARNINGS="yes"
+ENV NVIDIA_VISIBLE_DEVICES all
+ENV NVIDIA_DRIVER_CAPABILITIES compute,utility
+# ENV PATH /opt/conda/envs/bin:$PATH
+# ENV LD_LIBRARY_PATH /opt/conda/lib:$LD_LIBRARY_PATH
+
+RUN /usr/bin/python3 -m pip install --upgrade pip && pip install tensorflow-addons==0.14.0
+
+# run the app
+# to shell: python app.py
+CMD ["python","/src/main.py"]
+
+# docker build -f dockerfile.execute -t coreharbor.wurining.com/leeds/unet:v3.0 . 
+# docker push coreharbor.wurining.com/leeds/unet:v3.0
+
+# docker run -p 127.0.0.1:8679:5000 \
+# --mount type=bind,source=/home/serverleeds/Documents/projects/Service_DoubleLink3DUNet/tmp,target=/src/tmp \
+# -it coreharbor.wurining.com/leeds/unet:v2.0
+

@@ -1,0 +1,3 @@
+flask
+flask_restful
+tensorflow-addons==0.14.0

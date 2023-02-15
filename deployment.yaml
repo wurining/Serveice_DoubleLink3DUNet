@@ -1,0 +1,50 @@
+---
+# unet service deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: aip
+  name: ai-unet-dev
+spec:
+  selector:
+    matchLabels:
+      name: ai-unet-dev
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        name: ai-unet-dev
+    spec:
+      containers:
+        - image: coreharbor.wurining.com/leeds/unet:v4.0
+          imagePullPolicy: Always
+          name: ai-unet-dev
+          volumeMounts:
+            - name: bin
+              mountPath: /app
+          resources:
+            limits:
+              nvidia.com/gpu: "0"
+            requests:
+              nvidia.com/gpu: "0"
+          env:
+            - name: CUDA_VISIBLE_DEVICES
+              value: "0"
+            - name: NVIDIA_VISIBLE_DEVICES
+              value: all
+            - name: NVIDIA_DRIVER_CAPABILITIES
+              value: compute,utility
+            - name: TOKEN
+              value: "********"
+          command:
+            - python
+            - /app/main.py
+            - --id=181988168516534272
+            - --params={"model":"a","sample":["storage/20230215/334b7176fc520608af4b52b6fe1c4ce6_20230215050610.npz"]}
+      imagePullSecrets:
+        - name: private-reg
+      volumes:
+        - name: bin
+          hostPath:
+            path: /home/serverleeds/Documents/projects/Service_DoubleLink3DUNet

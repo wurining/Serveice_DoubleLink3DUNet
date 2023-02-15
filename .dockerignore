@@ -1,4 +1,8 @@
-.vscode/
-__pycache__/
+.vscode
+__pycache__
+*/__pycache__
 *.py[cod]
-tmp/
+tmp/*
+.gitignore
+.git
+model/model.zip

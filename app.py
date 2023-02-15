@@ -4,7 +4,6 @@ from evaluate import Evaluate
 import numpy as np
 import tempfile
 import os
-import sys
 
 UPLOAD_FOLDER = './tmp'
 
@@ -44,10 +43,10 @@ def inference_group_a():
     result_nparray = Evaluate().group_a(tmp_path)
     app.logger.debug("inference...")
     with tempfile.NamedTemporaryFile() as outfile:
-        np.save(outfile, result_nparray)
+        np.savez_compressed(outfile, arr=result_nparray)
         return send_file(path_or_file=outfile.name,
                          as_attachment=True,
-                         download_name="result.npy")
+                         download_name="result.npz")
 
 
 @app.route('/b', methods=['POST'])
@@ -59,10 +58,10 @@ def inference_group_b():
     result_nparray = Evaluate().group_b(tmp_path)
     app.logger.debug("inference...")
     with tempfile.NamedTemporaryFile() as outfile:
-        np.save(outfile, result_nparray)
+        np.savez_compressed(outfile, arr=result_nparray)
         return send_file(path_or_file=outfile.name,
                          as_attachment=True,
-                         download_name="result.npy")
+                         download_name="result.npz")
 
 
 @app.route('/c', methods=['POST'])
@@ -74,10 +73,10 @@ def inference_group_c():
     result_nparray = Evaluate().group_c(tmp_path)
     app.logger.debug("inference...")
     with tempfile.NamedTemporaryFile() as outfile:
-        np.save(outfile, result_nparray)
+        np.savez_compressed(outfile, arr=result_nparray)
         return send_file(path_or_file=outfile.name,
                          as_attachment=True,
-                         download_name="result.npy")
+                         download_name="result.npz")
 
 
 if __name__ == '__main__':
@@ -86,4 +85,3 @@ if __name__ == '__main__':
     app.run(debug=True, port=5000, host='0.0.0.0')
     # sys.stdout.flush()
     # print(flush=True)
-
